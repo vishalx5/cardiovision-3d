@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CardioVision 3D | Multimodal Cardiac Risk & Anatomical Twin</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for medical icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js for ECG & Biomarker radar -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Three.js + OrbitControls -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="app-header">
+        <div class="header-left">
+            <div class="logo-icon">
+                <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+            <div class="logo-text">
+                <h1>CardioVision <span>3D</span></h1>
+                <p class="tagline">Multimodal AI Cardiac Risk Prediction & Anatomical Digital Twin</p>
+            </div>
+            <span class="badge track-badge"><i class="fa-solid fa-trophy"></i> Multimodal AI Hackathon 2026 • Track A</span>
+        </div>
+        <div class="header-right">
+            <div class="status-indicator">
+                <span class="pulse-dot"></span>
+                <span>AI Engine: Active (Framingham + CAD-ML v2.4)</span>
+            </div>
+            <a href="presentation.html" target="_blank" class="nav-btn primary-nav-btn">
+                <i class="fa-solid fa-chalkboard-user"></i> Presentation (PPT)
+            </a>
+            <button id="btn-export-pdf" class="nav-btn secondary-nav-btn">
+                <i class="fa-solid fa-file-pdf"></i> Clinical Report
+            </button>
+            <a href="#video-script-modal" id="btn-open-script" class="nav-btn accent-nav-btn">
+                <i class="fa-solid fa-video"></i> Video Script
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Workspace Grid -->
+    <main class="main-container">
+        <!-- Left Sidebar: Patient Demographics & Multimodal Clinical Inputs -->
+        <aside class="panel patient-panel">
+            <div class="panel-header">
+                <h2><i class="fa-solid fa-clipboard-user"></i> Patient Clinical Profile</h2>
+                <span class="patient-id" id="patient-id-display">ID: PT-84092</span>
+            </div>
+
+            <!-- Quick Clinical Presets -->
+            <div class="preset-section">
+                <label class="section-label">Clinical Case Presets</label>
+                <div class="preset-buttons">
+                    <button class="preset-btn active" data-preset="critical">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <span>High Risk (CAD Acute)</span>
+                    </button>
+                    <button class="preset-btn" data-preset="moderate">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <span>Moderate Risk (Diabetic)</span>
+                    </button>
+                    <button class="preset-btn" data-preset="healthy">
+                        <i class="fa-solid fa-heart-circle-check"></i>
+                        <span>Low Risk (Healthy)</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Clinical Inputs Form -->
+            <div class="clinical-inputs-scroll">
+                <!-- Group 1: Demographics & Vitals -->
+                <div class="input-group-box">
+                    <h3><i class="fa-solid fa-user-doctor"></i> Demographics & Vitals</h3>
+                    <div class="input-row-2">
+                        <div class="input-field">
+                            <label>Age: <strong id="val-age">58</strong> yrs</label>
+                            <input type="range" id="input-age" min="25" max="85" value="58" class="slider">
+                        </div>
+                        <div class="input-field">
+                            <label>Sex</label>
+                            <select id="input-sex" class="select-box">
+                                <option value="male" selected>Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-row-2">
+                        <div class="input-field">
+                            <label>Resting BP: <strong id="val-trestbps">155</strong> mmHg</label>
+                            <input type="range" id="input-trestbps" min="90" max="200" value="155" class="slider">
+                        </div>
+                        <div class="input-field">
+                            <label>Heart Rate (BPM): <strong id="val-thalach">98</strong></label>
+                            <input type="range" id="input-thalach" min="45" max="180" value="98" class="slider highlight-slider">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group 2: Lipid Profile & Metabolism -->
+                <div class="input-group-box">
+                    <h3><i class="fa-solid fa-vial"></i> Lipid Profile & Metabolic Markers</h3>
+                    <div class="input-row-2">
+                        <div class="input-field">
+                            <label>Total Cholesterol: <strong id="val-chol">284</strong> mg/dL</label>
+                            <input type="range" id="input-chol" min="120" max="400" value="284" class="slider">
+                        </div>
+                        <div class="input-field">
+                            <label>HDL Cholesterol: <strong id="val-hdl">36</strong> mg/dL</label>
+                            <input type="range" id="input-hdl" min="20" max="100" value="36" class="slider">
+                        </div>
+                    </div>
+                    <div class="toggle-row">
+                        <label class="switch-container">
+                            <input type="checkbox" id="input-fbs" checked>
+                            <span class="switch-slider"></span>
+                            <span class="switch-text">Fasting Blood Sugar > 120 mg/dL (Diabetic Risk)</span>
+                        </label>
+                    </div>
+                    <div class="toggle-row">
+                        <label class="switch-container">
+                            <input type="checkbox" id="input-smoking" checked>
+                            <span class="switch-slider"></span>
+                            <span class="switch-text">Active Cigarette Smoker</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Group 3: Multimodal ECG & Ischemia Markers -->
+                <div class="input-group-box">
+                    <h3><i class="fa-solid fa-wave-square"></i> Multimodal ECG & Ischemic Stress</h3>
+                    <div class="input-field">
+                        <label>Chest Pain Symptom Type</label>
+                        <select id="input-cp" class="select-box">
+                            <option value="3" selected>Typical Angina (Retrosternal crushing)</option>
+                            <option value="2">Atypical Angina</option>
+                            <option value="1">Non-anginal Pain</option>
+                            <option value="0">Asymptomatic</option>
+                        </select>
+                    </div>
+                    <div class="input-row-2">
+                        <div class="input-field">
+                            <label>Resting ECG Wave</label>
+                            <select id="input-restecg" class="select-box">
+                                <option value="0">Normal</option>
+                                <option value="1" selected>ST-T Wave Abnormality</option>
+                                <option value="2">Left Ventricular Hypertrophy</option>
+                            </select>
+                        </div>
+                        <div class="input-field">
+                            <label>ST Depression: <strong id="val-oldpeak">2.8</strong> mm</label>
+                            <input type="range" id="input-oldpeak" min="0" max="6.0" step="0.1" value="2.8" class="slider">
+                        </div>
+                    </div>
+                    <div class="toggle-row">
+                        <label class="switch-container">
+                            <input type="checkbox" id="input-exang" checked>
+                            <span class="switch-slider"></span>
+                            <span class="switch-text">Exercise-Induced Ischemia / Angina</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real-time Risk Score Gauge Card -->
+            <div class="risk-summary-card">
+                <div class="risk-summary-left">
+                    <div class="risk-score-circle" id="risk-score-circle">
+                        <svg viewBox="0 0 100 100">
+                            <circle class="circle-bg" cx="50" cy="50" r="42"></circle>
+                            <circle class="circle-progress" id="score-meter" cx="50" cy="50" r="42"></circle>
+                        </svg>
+                        <div class="risk-score-value">
+                            <span id="risk-percentage">86%</span>
+                            <small>CAD RISK</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="risk-summary-right">
+                    <div class="risk-status-badge high" id="risk-status-badge">HIGH ISCHEMIC RISK</div>
+                    <p class="risk-framingham" id="ascvd-text">10-Yr ASCVD Risk: <strong>34.2% (Severe)</strong></p>
+                    <p class="risk-heartbeat-sync"><i class="fa-solid fa-heart-pulse"></i> 3D Twin Pulsing at: <strong id="live-bpm">98 BPM</strong></p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Center / Right: Interactive 3D Anatomical Digital Twin -->
+        <section class="panel viewer-panel">
+            <div class="viewer-top-bar">
+                <div class="twin-title">
+                    <h2><i class="fa-solid fa-cubes"></i> 3D Anatomical Cardiac Digital Twin</h2>
+                    <p>Real-time projection of coronary artery stenosis & myocardial ischemic zones</p>
+                </div>
+                <div class="viewer-controls">
+                    <button class="cam-btn active" data-view="front"><i class="fa-solid fa-street-view"></i> Anterior</button>
+                    <button class="cam-btn" data-view="lad"><i class="fa-solid fa-crosshairs"></i> Focus LAD</button>
+                    <button class="cam-btn" data-view="rca"><i class="fa-solid fa-crosshairs"></i> Focus RCA</button>
+                    <button class="cam-btn" data-view="lcx"><i class="fa-solid fa-crosshairs"></i> Focus LCx</button>
+                    <button id="btn-toggle-pulse" class="cam-btn pulse-active"><i class="fa-solid fa-heart"></i> Pulse: ON</button>
+                    <button id="btn-wireframe" class="cam-btn"><i class="fa-solid fa-vector-square"></i> Wireframe</button>
+                </div>
+            </div>
+
+            <!-- 3D Canvas Container -->
+            <div class="canvas-wrapper" id="canvas-container">
+                <!-- 3D Overlays -->
+                <div class="overlay-legend">
+                    <div class="legend-item"><span class="legend-color normal"></span> Healthy (&lt;30%)</div>
+                    <div class="legend-item"><span class="legend-color moderate"></span> Moderate (30-70%)</div>
+                    <div class="legend-item"><span class="legend-color critical"></span> Severe Occlusion (&gt;70%)</div>
+                </div>
+
+                <!-- Artery Live Status HUD -->
+                <div class="hud-arteries">
+                    <div class="hud-artery-card" id="hud-lad">
+                        <div class="hud-artery-header">
+                            <span class="artery-title">LAD (Left Anterior Descending)</span>
+                            <span class="artery-pct" id="lad-pct">88%</span>
+                        </div>
+                        <div class="hud-progress-bar"><div class="hud-fill critical" id="lad-bar" style="width: 88%"></div></div>
+                        <span class="hud-status" id="lad-status">Critical Stenosis (Widowmaker Zone)</span>
+                    </div>
+
+                    <div class="hud-artery-card" id="hud-rca">
+                        <div class="hud-artery-header">
+                            <span class="artery-title">RCA (Right Coronary Artery)</span>
+                            <span class="artery-pct" id="rca-pct">45%</span>
+                        </div>
+                        <div class="hud-progress-bar"><div class="hud-fill moderate" id="rca-bar" style="width: 45%"></div></div>
+                        <span class="hud-status" id="rca-status">Moderate Calcification (Inferior wall)</span>
+                    </div>
+
+                    <div class="hud-artery-card" id="hud-lcx">
+                        <div class="hud-artery-header">
+                            <span class="artery-title">LCx (Left Circumflex)</span>
+                            <span class="artery-pct" id="lcx-pct">35%</span>
+                        </div>
+                        <div class="hud-progress-bar"><div class="hud-fill moderate" id="lcx-bar" style="width: 35%"></div></div>
+                        <span class="hud-status" id="lcx-status">Mild/Moderate (Posterolateral)</span>
+                    </div>
+                </div>
+
+                <!-- Interactive 3D Tooltip (Follows mouse / raycast) -->
+                <div class="anatomical-tooltip" id="anatomical-tooltip">
+                    <h4 id="tooltip-title">Coronary Artery</h4>
+                    <p id="tooltip-desc">Hover over arteries or chambers to inspect anatomical perfusion.</p>
+                </div>
+
+                <!-- 3D Interaction Tip -->
+                <div class="interaction-hint">
+                    <i class="fa-solid fa-arrows-rotate"></i> Drag to rotate • Scroll to zoom • Click artery branches to inspect
+                </div>
+            </div>
+
+            <!-- Multimodal AI Clinical Assessment & Explainability Bar -->
+            <div class="diagnostic-bottom-bar">
+                <div class="diagnostic-col diagnostic-explanation">
+                    <div class="col-header">
+                        <h3><i class="fa-solid fa-brain-circuit"></i> Multimodal AI Clinical Reasoning</h3>
+                        <span class="model-tag">CardioVision-LLM + XGBoost</span>
+                    </div>
+                    <p id="ai-narrative">
+                        Patient presents with critical coronary artery disease probability. The convergence of elevated resting systolic BP (155 mmHg), severe ST-depression (2.8 mm during exercise), and an adverse Total/HDL cholesterol ratio (7.88) correlates with a high probability of proximal LAD (Left Anterior Descending) flow obstruction. Immediate catheterization and ischemic stabilization indicated.
+                    </p>
+                </div>
+
+                <div class="diagnostic-col diagnostic-recommendations">
+                    <div class="col-header">
+                        <h3><i class="fa-solid fa-notes-medical"></i> Actionable Clinical Directives</h3>
+                    </div>
+                    <ul class="recommendation-list" id="recommendation-list">
+                        <li><i class="fa-solid fa-circle-exclamation text-danger"></i> <strong>Urgent Angiography</strong>: Immediate referral for coronary angiogram to confirm LAD lesion.</li>
+                        <li><i class="fa-solid fa-pills text-warning"></i> <strong>Pharmacotherapy</strong>: Initiate high-intensity Statin + Dual Antiplatelet Therapy (DAPT) protocol.</li>
+                        <li><i class="fa-solid fa-heart-circle-bolt text-info"></i> <strong>Continuous Telemetry</strong>: Target resting HR reduction &lt; 70 BPM via Beta-blockers.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal: Video Presentation Script & Guide -->
+    <div id="video-script-modal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-video"></i> 2-Minute Hackathon Video Pitch & Recording Script</h2>
+                <a href="#" class="modal-close-btn">&times;</a>
+            </div>
+            <div class="modal-body">
+                <div class="script-banner">
+                    <p><strong>Goal:</strong> Follow this exact second-by-second timeline to record your screen & voice for a flawless, high-scoring hackathon submission.</p>
+                </div>
+
+                <div class="timeline-box">
+                    <div class="timeline-step">
+                        <span class="time-stamp">0:00 - 0:25</span>
+                        <div class="step-content">
+                            <h4>The Problem & Hook (Camera on 3D Beating Heart)</h4>
+                            <p><strong>What to say:</strong> "Cardiovascular disease kills over 18 million people each year. Yet, today's diagnostic reports remain trapped in dense, cryptic numbers that patients can't understand and doctors spend critical minutes deciphering. We built <em>CardioVision 3D</em>: an AI-driven multimodal cardiac risk predictor mapped onto a real-time 3D anatomical digital twin."</p>
+                            <p><strong>What to do on screen:</strong> Slowly rotate the 3D heart on screen, showing the beating motion and glowing arteries.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-step">
+                        <span class="time-stamp">0:25 - 0:55</span>
+                        <div class="step-content">
+                            <h4>Multimodal Input & Real-Time Twin Sync</h4>
+                            <p><strong>What to say:</strong> "Our platform ingests multimodal patient data: clinical vitals, lipid panels, and ECG ischemic markers like ST-depression. Watch what happens when we switch from a Healthy Patient to an Acute CAD Patient. The risk score surges to 86%, the 3D twin's heartbeat syncs in real time to the patient's elevated heart rate, and the Left Anterior Descending artery—the 'Widowmaker'—flashes in critical red, indicating 88% stenosis."</p>
+                            <p><strong>What to do on screen:</strong> Click the <strong>High Risk (CAD Acute)</strong> preset button. Move the Heart Rate slider up and down to show the heart physically beating faster!</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-step">
+                        <span class="time-stamp">0:55 - 1:25</span>
+                        <div class="step-content">
+                            <h4>Arterial Localization & 3D Interactive Inspection</h4>
+                            <p><strong>What to say:</strong> "Unlike black-box AI, CardioVision 3D provides spatial anatomical grounding. Clinicians can click directly on the LAD, RCA, and LCx artery branches to inspect localized ischemia and vessel perfusion. The system doesn't just predict risk; it tells the surgeon exactly where to look."</p>
+                            <p><strong>What to do on screen:</strong> Click the <strong>Focus LAD</strong> camera button to zoom onto the glowing artery. Hover over the artery branches to show the interactive tooltip.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-step">
+                        <span class="time-stamp">1:25 - 1:55</span>
+                        <div class="step-content">
+                            <h4>Explainable AI & Triage Action Plan</h4>
+                            <p><strong>What to say:</strong> "At the bottom, our multimodal explainability engine translates complex biomarker interactions into clear clinical reasoning and prioritizes life-saving triage actions, from urgent catheterization to pharmacotherapy. It bridges the gap between laboratory data and patient visual understanding."</p>
+                            <p><strong>What to do on screen:</strong> Scroll to the bottom AI reasoning panel and click <strong>Clinical Report</strong> to demonstrate exportability.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-step">
+                        <span class="time-stamp">1:55 - 2:00</span>
+                        <div class="step-content">
+                            <h4>Closing & Impact</h4>
+                            <p><strong>What to say:</strong> "CardioVision 3D: Transforming cardiovascular data into life-saving 3D visual intelligence. Thank you."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="presentation.html" target="_blank" class="nav-btn primary-nav-btn"><i class="fa-solid fa-play"></i> Open Presentation Slides (PPT)</a>
+                <a href="#" class="nav-btn secondary-nav-btn">Close</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Entry Point -->
+    <script src="app.js"></script>
+</body>
+</html>
