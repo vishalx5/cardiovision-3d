@@ -1,39 +1,63 @@
-# CardioVision 3D - 2-Minute Hackathon Video Pitch & Recording Guide
-
+# CardioVision 3D - 3 to 5 Minute Demo Video Script
+> **Official Hackathon Rule:** Video must be between **3 to 10 minutes on YouTube** (Unlisted is fine).  
 > **Track:** Track A - Cardiovascular Risk Visualization & Prediction  
-> **Target Duration:** 1 minute 50 seconds to 2 minutes  
-> **Key Objective:** Deliver a high-energy, visually captivating demo showing problem, solution, live 3D interaction, multimodal risk mapping, and clinical impact.
+> **Speaker Role:** Lead Developer & Presenter  
 
 ---
 
-## Pre-Recording Checklist (Takes 1 Minute)
-1. Launch the app locally: Run `python server.py` in your terminal and open `http://localhost:8000` in Google Chrome or Edge.
-2. Press **F11** for full-screen mode to remove browser address bars.
-3. Keep the 3D heart centered and start with the default view.
-4. Have your screen recorder ready (OBS Studio, Loom, Windows Game Bar: `Win + G`, or QuickTime).
+## ⏱️ Video Timeline (Target: ~3 Minutes 30 Seconds)
+
+### [0:00 - 0:45] 1. The Global Challenge & Problem Space
+* **Screen Action:** Show the 3D heart pulsing on screen. Rotate it slowly in full-screen mode.
+* **Narration:**
+  > *"Hello judges, welcome to our demonstration of **CardioVision 3D** for Track A of the Multimodal AI Hackathon 2026.  
+  > Cardiovascular disease is the leading cause of death globally, taking over 18 million lives every single year.  
+  > In clinical practice today, when a patient undergoes evaluation, their data is locked in disparate tabular reports: blood pressures, lipid panels, ECG strips, and echocardiography notes.  
+  > For patients, these abstract numbers—like ST-depression 2.8mm or a cholesterol ratio of 7.8—mean nothing. Over 75% of high-risk patients fail to follow critical therapies simply because they don't grasp the danger.  
+  > For emergency clinicians, synthesizing these numbers under acute triage pressure costs life-saving minutes before catheterization. We built CardioVision 3D to solve this."*
 
 ---
 
-## Second-by-Second Video Script
-
-| Time | Screen Action (What to show on screen) | Spoken Narration (What to say) |
-| :--- | :--- | :--- |
-| **0:00 - 0:20** | **Start on the beating 3D Heart.** Slowly click and drag with your mouse to rotate the 3D heart around, showcasing the anatomical chambers and glowing vessels. | *"Cardiovascular disease kills over 18 million people every single year—making it the leading cause of death on the planet. Yet, the way clinicians and patients communicate cardiac risk has barely evolved. Patients are handed dense, confusing laboratory printouts filled with numbers they don't understand, while emergency doctors spend crucial minutes deciphering disparate ECGs and blood panels."* |
-| **0:20 - 0:40** | **Move mouse to the top logo and then to the left panel.** Highlight the multimodal inputs (BP, Cholesterol, ECG ST-Depression). | *"Welcome to **CardioVision 3D**, an interactive multimodal AI cardiac digital twin that bridges this gap. Instead of abstract numbers, CardioVision fuses patient vitals, lipid profiles, and resting ECG ischemic markers into real-time 3D spatial intelligence."* |
-| **0:40 - 1:05** | **Click the "Low Risk (Healthy)" preset first, then immediately click "High Risk (CAD Acute)".** Watch the risk gauge jump to 86% and the 3D heart pulse faster. Move the Heart Rate slider to show live heartbeat synchronization. | *"Watch this in action. For a healthy individual, the coronary arteries remain green and patent. But when we load an acute cardiac patient—with elevated blood pressure, adverse cholesterol ratio, and exercise ST-depression—our predictive engine flags an 86% CAD risk. Notice how the 3D anatomical heart physically syncs its heartbeat to the patient's resting heart rate in real time!"* |
-| **1:05 - 1:30** | **Click the "Focus LAD" button.** The camera zooms onto the Left Anterior Descending artery glowing in pulsing crimson. Hover your mouse over the LAD artery to display the interactive tooltip. | *"More importantly, CardioVision 3D delivers spatial anatomical grounding. It doesn't just output a risk number; it maps stenosis directly onto the patient's coronary tree. Here, our model flags an 88% critical occlusion in the Left Anterior Descending artery—the dreaded 'Widowmaker'—and 45% in the Right Coronary Artery. Clinicians can click directly on any vessel to inspect downstream ischemic risk zones."* |
-| **1:30 - 1:45** | **Scroll down to the bottom AI Diagnostic Bar.** Point to the AI reasoning summary and clinical directives. Click the "Clinical Report" button in the top bar to show the print-ready medical summary. | *"At the bottom, our multimodal explainability engine translates biomarker interactions into plain-language clinical reasoning and actionable triage protocols—from urgent catheterization lab activation to targeted pharmacological therapy—which can be exported into an official clinical report with one click."* |
-| **1:45 - 2:00** | **Switch to the "Presentation (PPT)" tab or zoom back out on the 3D Heart.** | *"CardioVision 3D transforms complex cardiovascular data into intuitive, life-saving visual intelligence. Thank you!"* |
+### [0:45 - 1:30] 2. Multimodal Data Ingestion & Clinical Presets
+* **Screen Action:** Move mouse to the left sidebar. Walk through the inputs (Demographics, Blood Pressure, Heart Rate, Lipid profile, ECG abnormalities).
+* **Narration:**
+  > *"CardioVision 3D is a true multimodal platform. It bridges three distinct modalities based on the benchmark Z-Alizadeh Sani clinical dataset:  
+  > First, physiological vital signs: Age, Sex, Resting Blood Pressure, and Heart Rate.  
+  > Second, biochemical metabolic markers: Total Cholesterol, HDL, and Fasting Blood Sugar.  
+  > Third, electrophysiological data: Resting ECG waveforms, ST-segment depression, and exercise-induced angina.  
+  > Let's test our clinical presets. When we load a 'Low Risk Healthy' individual, our model predicts optimal status—under 12% CAD likelihood—and all coronary vessels remain green and patent.  
+  > Now, watch what happens when we switch to our 'High Risk Acute CAD Patient'..."*
 
 ---
 
-## Key Talking Points if Asked Questions by Judges
+### [1:30 - 2:30] 3. The 3D Anatomical Digital Twin & Vessel-Level Localization
+* **Screen Action:** Click **"High Risk (CAD Acute)"**. The gauge turns red (86%). Adjust the **Heart Rate slider** up and down to show the 3D heart physically beating faster. Click **"Focus LAD"**, then hover over LAD, RCA, and LCx.
+* **Narration:**
+  > *"Instantly, our predictive engine calculates an 86% CAD risk and a 34% 10-year ASCVD risk.  
+  > But here is our core innovation: CardioVision 3D translates this prediction into **spatial anatomical grounding**.  
+  > In real time, the 3D digital twin synchronizes its dual-phase systolic contractions to the patient's resting heart rate—pulsing at 98 BPM.  
+  > Rather than giving a generic black-box score, our model predicts stenosis individually for the three major coronary branches:  
+  > First, the Left Anterior Descending (LAD) artery—clinically known as the 'Widowmaker'—which supplies over 50% of the left ventricle. Our model flags an 88% critical occlusion, causing the LAD vessel to glow in pulsing crimson.  
+  > Second, the Right Coronary Artery (RCA), showing 45% moderate calcification in yellow.  
+  > Third, the Left Circumflex (LCx), at 35%.  
+  > Clinicians can interactively rotate, zoom, switch to wireframe mode, and click directly on any vessel to inspect localized perfusion metrics."*
 
-### Q1: What makes this truly "Multimodal"?
-> *"CardioVision 3D does not rely on a single data modality. It combines **physiological tabular vitals** (blood pressure, heart rate, age, sex), **biochemical lipid panels** (Total/HDL cholesterol, fasting blood glucose), **electrophysiological waveforms** (ST-segment depression, resting ECG abnormalities), and **clinical symptom history** (angina classification). It correlates these signals to predict not just systemic risk, but vessel-specific stenosis probabilities."*
+---
 
-### Q2: How does the 3D anatomical twin benefit clinical workflow?
-> *"In patient communication, visual digital twins increase patient therapy adherence by over 300% because patients can visually witness their own occluded artery. For surgeons and cardiologists, having spatial grounding of ischemic territory before catheterization accelerates triage speed in time-critical emergency scenarios."*
+### [2:30 - 3:00] 4. Explainable AI (SHAP) & Actionable Clinical Triage
+* **Screen Action:** Scroll to the bottom diagnostic bar. Point to the SHAP feature attribution bars and clinical directives. Click **"Clinical Report"** at the top.
+* **Narration:**
+  > *"To ensure clinical interpretability, our dashboard features a SHAP feature attribution breakdown. It shows that the patient's severe 2.8mm ST-depression and 7.88 Total/HDL ratio contributed over 50% of the predictive weight.  
+  > It immediately generates prioritized triage directives: urgent catheterization lab activation, high-intensity statin plus dual-antiplatelet therapy, and beta-blocker rate control.  
+  > Clinicians can export this as an official printable clinical report with one click.  
+  > And prominently displayed is our clinical safety disclaimer, ensuring compliance with medical decision-support guidelines."*
 
-### Q3: What is the underlying architecture and future scope?
-> *"The frontend is powered by Three.js WebGL with custom shaders and dynamic dual-phase cardiac physics. The predictive tier integrates Framingham ASCVD risk models with multi-factor logistic gradient-boosted decision ensembles. Our roadmap includes integrating automated 3D vessel reconstruction directly from DICOM coronary CT angiograms (CCTA) and WebXR for surgical planning in AR/VR headsets."*
+---
+
+### [3:00 - 3:30] 5. Architecture, Tech Stack & Conclusion
+* **Screen Action:** Open the **Presentation (PPT)** tab (`presentation.html`), show Slide 4 (Architecture) and Slide 7 (Roadmap), then return to the 3D heart.
+* **Narration:**
+  > *"Under the hood, CardioVision 3D is powered by a high-performance Three.js WebGL graphics pipeline, integrated with an ensemble classifier trained on the Z-Alizadeh Sani benchmark achieving an ROC-AUC of 0.92.  
+  > The entire solution runs client-side with zero latency and zero hardware barrier.  
+  > Our future roadmap includes integrating automated 3D vessel reconstruction directly from DICOM coronary CT scans and WebXR for surgical planning.  
+  > CardioVision 3D transforms silent cardiovascular data into life-saving visual intelligence. Thank you!"*

@@ -864,6 +864,87 @@ body {
 .text-warning { color: #fbbf24; }
 .text-info { color: #38bdf8; }
 
+/* SHAP Attribution Styles */
+.shap-container {
+    margin-top: 8px;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+.shap-title {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--accent-cyan);
+    display: block;
+    margin-bottom: 6px;
+}
+
+.shap-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.shap-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.68rem;
+    color: var(--text-secondary);
+}
+
+.shap-row span {
+    width: 140px;
+}
+
+.shap-bar-bg {
+    flex: 1;
+    height: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.shap-bar-fill {
+    height: 100%;
+    font-size: 0.6rem;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 6px;
+    border-radius: 4px;
+}
+
+.shap-bar-fill.red { background: linear-gradient(90deg, #f87171, #ef4444); }
+.shap-bar-fill.amber { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+.shap-bar-fill.green { background: linear-gradient(90deg, #34d399, #10b981); }
+
+/* Mandatory Safety Disclaimer Box */
+.safety-disclaimer-box {
+    margin-top: 8px;
+    background: rgba(245, 158, 11, 0.08);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    border-radius: 6px;
+    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.65rem;
+    color: #fbbf24;
+    line-height: 1.35;
+}
+
+.safety-disclaimer-box i {
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
 /* Modal */
 .modal-overlay {
     position: fixed;

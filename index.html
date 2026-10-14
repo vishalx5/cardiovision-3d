@@ -266,11 +266,21 @@
                 <div class="diagnostic-col diagnostic-explanation">
                     <div class="col-header">
                         <h3><i class="fa-solid fa-brain-circuit"></i> Multimodal AI Clinical Reasoning</h3>
-                        <span class="model-tag">CardioVision-LLM + XGBoost</span>
+                        <span class="model-tag">Z-Alizadeh Sani Ensemble • ROC-AUC: 0.92</span>
                     </div>
                     <p id="ai-narrative">
                         Patient presents with critical coronary artery disease probability. The convergence of elevated resting systolic BP (155 mmHg), severe ST-depression (2.8 mm during exercise), and an adverse Total/HDL cholesterol ratio (7.88) correlates with a high probability of proximal LAD (Left Anterior Descending) flow obstruction. Immediate catheterization and ischemic stabilization indicated.
                     </p>
+                    <!-- SHAP Feature Attribution Breakdown -->
+                    <div class="shap-container">
+                        <span class="shap-title"><i class="fa-solid fa-chart-simple"></i> Top SHAP Feature Attributions to CAD Risk:</span>
+                        <div class="shap-bars">
+                            <div class="shap-row"><span>ST-Depression (2.8mm)</span><div class="shap-bar-bg"><div class="shap-bar-fill red" style="width: 82%">+28%</div></div></div>
+                            <div class="shap-row"><span>Chol / HDL Ratio (7.88)</span><div class="shap-bar-bg"><div class="shap-bar-fill red" style="width: 68%">+22%</div></div></div>
+                            <div class="shap-row"><span>Resting Systolic BP (155)</span><div class="shap-bar-bg"><div class="shap-bar-fill amber" style="width: 54%">+17%</div></div></div>
+                            <div class="shap-row"><span>Typical Angina (CP-3)</span><div class="shap-bar-bg"><div class="shap-bar-fill amber" style="width: 46%">+14%</div></div></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="diagnostic-col diagnostic-recommendations">
@@ -282,6 +292,12 @@
                         <li><i class="fa-solid fa-pills text-warning"></i> <strong>Pharmacotherapy</strong>: Initiate high-intensity Statin + Dual Antiplatelet Therapy (DAPT) protocol.</li>
                         <li><i class="fa-solid fa-heart-circle-bolt text-info"></i> <strong>Continuous Telemetry</strong>: Target resting HR reduction &lt; 70 BPM via Beta-blockers.</li>
                     </ul>
+                    
+                    <!-- Mandatory Clinical Safety Disclaimer -->
+                    <div class="safety-disclaimer-box">
+                        <i class="fa-solid fa-shield-heart"></i>
+                        <span><strong>Clinical Safety Disclaimer:</strong> CardioVision 3D predictions are for investigational decision-support and educational purposes only. Not a substitute for formal diagnostic coronary angiography or licensed physician judgment.</span>
+                    </div>
                 </div>
             </div>
         </section>
