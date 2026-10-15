@@ -1,0 +1,99 @@
+1
+00:00:01,000 --> 00:00:06,000
+Welcome to CardioVision 3D: Multimodal AI Cardiac Risk Prediction & Anatomical Twin (Track A).
+
+2
+00:00:06,500 --> 00:00:12,000
+Cardiovascular disease is the #1 killer worldwide, claiming over 18 million lives every year.
+
+3
+00:00:12,500 --> 00:00:19,000
+Today's diagnostic reports are trapped in abstract tables (e.g. ST-depression 2.8mm, Chol/HDL 7.8) that patients cannot understand.
+
+4
+00:00:19,500 --> 00:00:26,000
+And emergency clinicians spend critical triage minutes manually cross-referencing disparate lab values before surgery.
+
+5
+00:00:26,500 --> 00:00:33,000
+CardioVision 3D solves this by transforming clinical data into a real-time, beating 3D anatomical digital twin.
+
+6
+00:00:34,000 --> 00:00:40,000
+Our platform ingests multimodal data across 3 clinical tiers based on the Z-Alizadeh Sani benchmark:
+
+7
+00:00:40,500 --> 00:00:47,000
+Tier 1: Physiological Vitals (Age, Sex, Resting BP, Heart Rate).
+
+8
+00:00:47,500 --> 00:00:54,000
+Tier 2: Biochemical Lipid Panels (Total Cholesterol, HDL, Fasting Blood Sugar).
+
+9
+00:00:54,500 --> 00:01:02,000
+Tier 3: Electrophysiological Markers (Resting ECG Waveforms, ST-Segment Depression, and Angina Classification).
+
+10
+00:01:03,000 --> 00:01:10,000
+In healthy individuals, the predictive model reports low risk (<15%), with all coronary vessels patent in green.
+
+11
+00:01:11,000 --> 00:01:18,000
+Now, watch what happens when we switch to a High-Risk Acute Coronary Syndrome patient.
+
+12
+00:01:18,500 --> 00:01:25,000
+The composite CAD risk surges to 86%, and the 10-year ASCVD score rises to 34% (Severe).
+
+13
+00:01:25,500 --> 00:01:33,000
+Notice the 3D heart physically synchronizing its dual-phase systolic contractions to the patient's resting heart rate (98 BPM).
+
+14
+00:01:34,000 --> 00:01:42,000
+Unlike black-box algorithms, CardioVision 3D grounds risk into spatial anatomical localization.
+
+15
+00:01:42,500 --> 00:01:50,000
+Focusing on the Left Anterior Descending (LAD) artery—the 'Widowmaker'—which supplies over 50% of the left ventricle.
+
+16
+00:01:50,500 --> 00:01:58,000
+Our model detects an 88% critical luminal occlusion, causing the LAD branch to glow in pulsing crimson.
+
+17
+00:01:58,500 --> 00:02:06,000
+The Right Coronary Artery (RCA) shows 45% moderate calcification in yellow, while the Left Circumflex (LCx) shows 35%.
+
+18
+00:02:07,000 --> 00:02:15,000
+Clinicians can interactively rotate, zoom, and select individual arterial branches to inspect localized perfusion.
+
+19
+00:02:16,000 --> 00:02:24,000
+At the bottom, our Explainable AI (SHAP) engine breaks down relative feature contributions to the prediction.
+
+20
+00:02:24,500 --> 00:02:32,000
+Severe ST-depression (+28%) and an adverse 7.88 Chol/HDL ratio (+22%) are the primary pathological drivers.
+
+21
+00:02:33,000 --> 00:02:40,000
+The system immediately prioritizes actionable triage directives: urgent catheterization lab activation and high-intensity statin therapy.
+
+22
+00:02:40,500 --> 00:02:48,000
+Clinicians can export an official printable clinical report with one click, accompanied by clear medical safety disclaimers.
+
+23
+00:02:49,000 --> 00:02:56,000
+Under the hood: Three.js WebGL graphics with zero hardware barriers, paired with an ensemble classifier achieving an ROC-AUC of 0.92.
+
+24
+00:02:57,000 --> 00:03:05,000
+Future roadmap: direct DICOM CT reconstruction and WebXR holographic surgical planning for interventional cardiologists.
+
+25
+00:03:06,000 --> 00:03:15,000
+CardioVision 3D: Transforming silent cardiovascular data into life-saving visual intelligence. Thank you!

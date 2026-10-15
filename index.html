@@ -35,6 +35,9 @@
                 <span class="pulse-dot"></span>
                 <span>AI Engine: Active (Framingham + CAD-ML v2.4)</span>
             </div>
+            <button id="btn-start-tour" class="nav-btn tour-nav-btn">
+                <i class="fa-solid fa-clapperboard"></i> ▶ Start Subtitle Tour (3:15)
+            </button>
             <a href="presentation.html" target="_blank" class="nav-btn primary-nav-btn">
                 <i class="fa-solid fa-chalkboard-user"></i> Presentation (PPT)
             </a>
@@ -255,8 +258,14 @@
                     <p id="tooltip-desc">Hover over arteries or chambers to inspect anatomical perfusion.</p>
                 </div>
 
+                <!-- Subtitle Cinema Overlay for Video Recording -->
+                <div class="cinema-subtitle-container" id="subtitle-box">
+                    <div class="subtitle-badge"><i class="fa-solid fa-closed-captioning"></i> CARDIOVISION 3D DEMO • <span id="tour-time">0:00 / 3:15</span></div>
+                    <p class="subtitle-text" id="subtitle-text">Click "▶ Start Subtitle Tour" to begin the automated 3:15 demo with on-screen English subtitles.</p>
+                </div>
+
                 <!-- 3D Interaction Tip -->
-                <div class="interaction-hint">
+                <div class="interaction-hint" id="interaction-hint">
                     <i class="fa-solid fa-arrows-rotate"></i> Drag to rotate • Scroll to zoom • Click artery branches to inspect
                 </div>
             </div>
